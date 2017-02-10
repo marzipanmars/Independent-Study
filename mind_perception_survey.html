@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mind Perception Survey</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="../jspsych-6.0/plugins/jspsych-survey-likert.js"></script>
+  <script src="../jspsych-6.0/plugins/jspsych-text.js"></script>
+  <link href="../jspsych-6.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body></body>
+<script>
+
+var trial = {
+  type: "text",
+  text: "hello world"
+};
+
+jsPsych.init({
+  timeline: [ trial ]
+});
+
+</script>
+</html>

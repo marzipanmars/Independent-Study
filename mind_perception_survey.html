@@ -2,21 +2,102 @@
 <html>
 <head>
   <title>Mind Perception Survey</title>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="../jspsych-6.0/jspsych.js"></script>
   <script src="../jspsych-6.0/plugins/jspsych-survey-likert.js"></script>
   <script src="../jspsych-6.0/plugins/jspsych-text.js"></script>
   <link href="../jspsych-6.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  <link href="mind_perception_survey.css" rel="stylesheet" type="text/css"></link>
 </head>
 <body></body>
 <script>
 
-var trial = {
-  type: "text",
-  text: "hello world"
+/* array containing names and descriptions of each character */
+var characters = [
+  { name: "is a green frog", description: "<h1>A Green Frog</h1><p>Found throughout eastern North America, "
+  +"this classic 'pond frog' is medium-sized and green or bronze in color. "
+  +"Daily life includes seeking out permanent ponds or slow streams with "
+  +"plenty of vegetation.</p>" },
+  { name: "is Charlie", description: "<h1>Charlie</h1><p>A 3-year-old Springer spaniel and "
+  +"a beloved member of the Graham family.</p>"},
+  { name: "is Toby", description: "<h1>Toby</h1><p>A two-year-old chimpanzee living at an "
+  +"outdoor laboratory in Uganda.</p>"},
+  { name: "is a 7 week fetus", description: "<h1>A 7 Week Fetus</h1><p>At 7 weeks, a human fetus "
+  +"is almost half an inch long--roughly the size of a raspberry.</p>"},
+  { name: "is Nicholas Gannon", description: "<h1>Nicholas Gannon</h1><p>A five-month-old baby.</p>" },
+  { name: "is Samantha Hill", description: "<h1>Samantha Hill</h1><p>A five-year-old girl who lives "
+  +"with her parents and older sister Jennifer.</p>" },
+  { name: "is Sharon Harvey", description: "<h1>Sharon Harvey</h1><p>A thirty-eight-year-old, "
+  +"works at an advertising agency in Chicago.</p>"},
+  { name: "is Todd Billingsly", description: "<h1>Todd Billingsly</h1><p>A thirty-year-old accountant "
+  +"who lives in New York City.</p>"},
+  { name: "are you", description: "<h1>You</h1><p>When you look into a mirror, please consider "
+  +"how you, yourself, would compare with the other characters presented.</p>"},
+  { name: "is Gerald Schiff", description: "<h1>Gerald Schiff</h1><p>Gerald has been in a persistent vegetative "
+  +"state (PVS) for the past six months. Although he has severe brain damage--Gerald does not "
+  +"appear to communicate with others or make purposeful movements--his basic bodily functions "
+  +"(such as breathing, sleeping, and circulation) are preserved.</p>"},
+  { name: "is Delores Gleitman", description: "<h1>Delores Gleitman</h1><p>Delores recently passed away at the age "
+  +"of 65. As you complete the survey, please draw upon your own personal beliefs about people "
+  +"who have passed away.</p>"},
+  { name: "is God", description: "<h1>God</h1><p>Many people believe that God is the creator of the universe "
+  +"and the ultimate source of knowledge, power, and love. However, please draw upon your own "
+  +"personal beliefs about God.</p>"},
+  { name: "is Kismet", description: "<h1>Kismet</h1><p>Kismet is part of a new class of 'sociable' robots "
+  +"that can engage people in natural interaction. To do this, Kismet perceives a variety of "
+  +"natural social signals from sound and sight, and delivers his own signals back to the human "
+  +"partner through gaze direction, facial expression, body posture, and vocal babbles.</p>"},
+];
+
+/* function that returns an array of Strings; each jsPsych.timelineVariable() call
+   returns a String value, rather than the function to retrieve that String had
+   'true' not been used as the second parameter for the function */
+var questions = function(){
+  return [
+  "How capable "+jsPsych.timelineVariable('name',true)+" of conveying thoughts and feelings?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of having experiences and being aware of things?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of longing or hoping for things?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of experiencing embarrassment?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of understanding how others are feeling?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of feeling afraid or fearful?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of feeling hungry?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of experiencing joy?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of remembering things?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of telling right from wrong and choosing to do the right thing?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of experiencing physical or emotional pain?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of having personality traits that make it unique from others?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of making plans and working towards a goal?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of experiencing physical or emotional pleasure?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of experiencing pride?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of experiencing violent or uncontrolled anger?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of exercising self-restraint over desires, emotions, or impulses?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of thinking?",
+  ];
+}
+
+/* the five-point scale to be used */
+var scale = [ "Entirely Incapable", " ", " ", " ", "Entirely Capable"];
+
+var survey_procedure = {
+    timeline: [
+        {
+          type: 'text',
+          text: "<h1>What kinds of things have minds?</h1><p>It's assumed that things "
+          +"simply have more or less of a mind. For this survey, you will be judging "
+          +"18 individual mental capacties for 13 characters.</p>"
+        },
+        {
+          type: 'survey-likert',
+          questions: questions,
+          labels: [ scale, scale, scale, scale, scale, scale, scale, scale, scale,
+                    scale, scale, scale, scale, scale, scale, scale, scale, scale ],
+          preamble: jsPsych.timelineVariable('description')
+        }
+    ],
+    timeline_variables: characters
 };
 
 jsPsych.init({
-  timeline: [ trial ]
+  timeline: [ survey_procedure ]
 });
 
 </script>

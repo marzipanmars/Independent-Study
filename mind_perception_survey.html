@@ -77,14 +77,15 @@ var questions = function(){
 /* the five-point scale to be used */
 var scale = [ "Entirely Incapable", " ", " ", " ", "Entirely Capable"];
 
+var introduction_block = {
+    type: 'text',
+    text: "<h1>What kinds of things have minds?</h1><p>It's assumed that things "
+    +"simply have more or less of a mind. For this survey, you will be judging "
+    +"18 individual mental capacties for 13 characters.</p>"
+};
+
 var survey_procedure = {
     timeline: [
-        {
-          type: 'text',
-          text: "<h1>What kinds of things have minds?</h1><p>It's assumed that things "
-          +"simply have more or less of a mind. For this survey, you will be judging "
-          +"18 individual mental capacties for 13 characters.</p>"
-        },
         {
           type: 'survey-likert',
           questions: questions,
@@ -97,7 +98,7 @@ var survey_procedure = {
 };
 
 jsPsych.init({
-  timeline: [ survey_procedure ]
+  timeline: [ introduction_block, survey_procedure ]
 });
 
 </script>

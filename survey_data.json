@@ -1,0 +1,51 @@
+[
+  {"title":"Expression",
+    "subtitle":"",
+    "data":[
+      { "character": "green frog", "scores": 2 },
+      { "character": "Charlie", "scores": 4 },
+      { "character": "Nicholas Gannon", "scores": 5 },
+      { "character": "Delores Gleitman", "scores": 1 }]},
+  {"title":"Awareness",
+    "subtitle":"",
+    "data":[
+      { "character": "green frog", "scores": 3 },
+      { "character": "Charlie", "scores": 4 },
+      { "character": "Nicholas Gannon", "scores": 3.5 },
+      { "character": "Delores Gleitman", "scores": 1 }]},
+  {"title":"Hope",
+    "subtitle":"",
+    "data":[
+      { "character": "green frog", "scores": 3 },
+      { "character": "Charlie", "scores": 4 },
+      { "character": "Nicholas Gannon", "scores": 3.5 },
+      { "character": "Delores Gleitman", "scores": 1 }]},
+  {"title":"Embarrassment",
+    "subtitle":"",
+    "data":[
+      { "character": "green frog", "scores": 2 },
+      { "character": "Charlie", "scores": 4 },
+      { "character": "Nicholas Gannon", "scores": 3 },
+      { "character": "Delores Gleitman", "scores": 1 }]},
+  {"title":"Empathy",
+    "subtitle":"",
+    "data":[
+      { "character": "green frog", "scores": 2 },
+      { "character": "Charlie", "scores": 3 },
+      { "character": "Nicholas Gannon", "scores": 3.5 },
+      { "character": "Delores Gleitman", "scores": 1 }]},
+  {"title":"Fear",
+    "subtitle":"",
+    "data":[
+      { "character": "green frog", "scores": 4 },
+      { "character": "Charlie", "scores": 4.5 },
+      { "character": "Nicholas Gannon", "scores": 3.5 },
+      { "character": "Delores Gleitman", "scores": 1 }]},
+  {"title":"Hunger",
+    "subtitle":"",
+    "data":[
+      { "character": "green frog", "scores": 4 },
+      { "character": "Charlie", "scores": 4.5 },
+      { "character": "Nicholas Gannon", "scores": 5 },
+      { "character": "Delores Gleitman", "scores": 1 }]}
+]

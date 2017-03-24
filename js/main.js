@@ -16,7 +16,7 @@ function visualizeData() {
       .attr("transform", "translate(90, 90)")
 
 /* set scaleBar labels, width, height, fill-color, and y-offset */
-  var data_categories = ["expression", "awareness", "hope", "embarrassment", "empathy", "fear", "hunger", "joy", "memory", "morality", "joy", "pain", "personality", "attainment", "pleasure", "pride", "anger", "self-restraint", "thought"],
+  var data_categories = ["expression", "awareness", "hope", "embarrassment", "empathy", "fear"], //"hunger", "joy", "memory", "morality", "joy", "pain", "personality", "attainment", "pleasure", "pride", "anger", "self-restraint", "thought"],
       scale_width = 500,
       scale_height = 25,
       fill_color = "Gainsboro"
@@ -36,6 +36,10 @@ function visualizeData() {
         .attr("width", scale_width)
         .attr("height", scale_height)
         .attr("fill", fill_color)
+        /* assign unique id to each scaleBar */
+        .attr("id", function(d) {
+          return d;
+        })
 
   /* create scaling for the scaleBar axes */
   var scaling_axis = d3.scaleLinear()
@@ -69,16 +73,44 @@ function visualizeData() {
     .enter()
       .append("text")
         .attr("y", function(d, i) {
-          return i * dy + (scale_height/1.5);
+          return i * dy + (scale_height/1.3);
         })
-        .attr("x", scale_width + 25)
-        .attr("fill", "DarkSlateGray")
+        .attr("x", scale_width + 10)
+        .attr("fill", fill_color)
         .text(function(d) {
           return d;
         })
 
   /* import JSON */
   d3.json("test_data.json", function(data) {
+
+    /* create array of values from each JSON property */
+    var charNames = data.map(function(a) {return a.character;});
+    var results = data.map(function(a) {return (a.expression * 100) - 1;});
+    //console.log(charNames);
+
+    var scaling_ticks = d3.scaleOrdinal()
+      .domain(charNames)
+      /* expression scores in corresponding order */
+      .range(results);
+
+    var tickMarks = d3.axisTop(scaling_ticks);
+
+    // d3.select("#expression")
+    //   .append("g")
+    //     .attr("class", "tickMarks")
+    //     .call(tickMarks);
+
+    scaleBars.select("g")
+          .data(data_categories)
+          .enter()
+            .append("g")
+              .attr("class", "tickMarks")
+              /* moves each axis to the bottom of its scaleBar */
+              .attr("transform", function(d, i) {
+                return "translate(0," + (i * dy) + ")";
+              })
+              .call(tickMarks);
 
   })
 }

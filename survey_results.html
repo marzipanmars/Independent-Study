@@ -2,89 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script type="text/javascript" src="../d3/d3.js"></script>
-  <script type="text/javascript" src="scale.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/foundation/js/foundation.js"></script>
+  <script src="bower_components/modernizr/modernizr.js"></script>
+  <script src="bower_components/d3/d3.min.js"></script>
+  <script src="js/main.js"></script>
   <title>Survey Results</title>
   <style>
-  body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin: auto;
-    padding-top: 50px;
-    position: relative;
-    width: 980px;
-  }
-  body #title {
-    text-align: center;
-    padding-left: 6%;
-  }
-  button {
-    position: relative;
-    margin-left: 450px;
-    margin-bottom: 25px;
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-  .scale { font: 10px sans-serif; }
-  .scale .marker { stroke: steelblue; stroke-width: 2px; }
-  .scale .tick line { stroke: #999; stroke-width: 0.5px; }
-  .scale .range { fill: #eee; }
-  .scale .title { font-size: 14px; font-weight: bold; }
+    .scaleAxis line, .scaleAxis path {
+      stroke: Gainsboro;
+    }
+    .scaleAxis text {
+      fill: Gainsboro;
+    }
   </style>
 </head>
 <body>
-  <h1 id="title">Mind Perception Survey Results</h1>
-  <button>Update</button>
+  <div class="svgContainer"></div>
   <script>
-
-  var margin = {top: 5, right: 40, bottom: 20, left: 120},
-  width = 950 - margin.left - margin.right,
-  height = 45 - margin.top - margin.bottom;
-
-  var chart = d3.scale()
-  .width(width)
-  .height(height);
-
-  d3.json("survey_data.json", function(error, data) {
-    if (error) throw error;
-
-    var svg = d3.select("body").selectAll("svg")
-    .data(data)
-    .enter().append("svg")
-    .attr("class", "scale")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .call(chart);
-
-    var title = svg.append("g")
-    .style("text-anchor", "end")
-    .attr("transform", "translate(-10," + height / 1.5 + ")");
-
-    title.append("text")
-    .attr("class", "title")
-    .text(function(d) { return d.title; });
-
-    d3.selectAll("button").on("click", function() {
-      //svg.datum(randomize).call(chart.duration(1000)); // TODO automatic transition
-    });
-  });
-
-  // function randomize(d) {
-  //   if (!d.randomizer) d.randomizer = randomizer(d);
-  //   d.ranges = d.ranges.map(d.randomizer);
-  //   d.markers = d.markers.map(d.randomizer);
-  //   d.measures = d.measures.map(d.randomizer);
-  //   return d;
-  // }
-
-  // function randomizer(d) {
-  //   var k = d3.max(d.ranges) * .2;
-  //   return function(d) {
-  //     return Math.max(0, d + k * (Math.random() - .5));
-  //   };
-  // }
-
+    visualizeData();
   </script>
 </body>
 </html>

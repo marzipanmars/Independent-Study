@@ -1,6 +1,6 @@
 function visualizeData() {
   var canvas_width = 1000,
-      canvas_height = 500;
+      canvas_height = 800;
 
   var scaling = d3.scaleLinear()
       .domain([0, 0])
@@ -11,13 +11,13 @@ function visualizeData() {
       .attr("width", canvas_width)
       .attr("height", canvas_height)
     .append("g")
-      .attr("transform", "translate(90, 30)")
+      .attr("transform", "translate(90, 90)")
 
   var data_categories = ["expression", "awareness", "hope", "embarrassment", "empathy", "fear"], //"hunger", "joy", "memory", "morality", "joy", "pain", "personality", "attainment", "pleasure", "pride", "anger", "self-restraint", "thought"],
       scale_width = 500,
       scale_height = 25,
       fill_color = "Gainsboro"
-      dy = 100;
+      dy = 120;
 
   var scaleBars = canvas.selectAll("rect")
     .data(data_categories)
@@ -62,6 +62,6 @@ function visualizeData() {
         })
 
   d3.json("test_data.json", function(data) {
-    console.log(data);
+    
   })
 }

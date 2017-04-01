@@ -4,8 +4,8 @@ function visualizeData() {
       canvas_height = 700;
 
   /* scaling to adjust height of scaleBars if they exceed the range */
-  var scaling = d3.scaleLinear()
-      .range([0, canvas_height]);
+  // var scaling = d3.scaleLinear()
+  //    .range([0, canvas_height]);
 
   /* create svg element via DOM manipulation */
   var canvas = d3.select(".svgContainer")
@@ -17,7 +17,7 @@ function visualizeData() {
 
   /* set scaleBar labels, width, height, fill-color, and y-offset */
   var data_categories = ["expression", "awareness", "hope", "embarrassment", "empathy", "fear"], //"hunger", "joy", "memory", "morality", "joy", "pain", "personality", "attainment", "pleasure", "pride", "anger", "self-restraint", "thought"],
-      scale_width = 500,
+      scale_width = 501,
       scale_height = 25,
       fill_color = "Gainsboro"
       dy = 100;
@@ -53,6 +53,8 @@ function visualizeData() {
   var axis = d3.axisBottom()
       /* set number of ticks on axis */
       .ticks(5)
+      /* sets the height of the ticks in pixels */
+      .tickSize(1)
       /* pass scale as an argument */
       .scale(scaling_axis);
 
@@ -74,7 +76,7 @@ function visualizeData() {
     .enter()
       .append("text")
         .attr("y", function(d, i) {
-          return i * dy + (scale_height/1.3);
+          return i * dy + (scale_height/1.25);
         })
         .attr("x", scale_width + 10)
         .attr("fill", fill_color)
@@ -83,20 +85,90 @@ function visualizeData() {
         })
 
   /* import JSON */
-  d3.json("test_data.json", function(data) {
+  d3.json("test_data2.json", function(data) {
 
-    /* create array of values from each JSON property */
-    var charNames = data.map(function(a) {return a.character;});
-    var expressionResults = data.map(function(a) {return (a.expression * 100) - 1;});
-    var awarenessResults = data.map(function(a) {return (a.awareness * 100) - 1;});
-    var hopeResults = data.map(function(a) {return (a.hope * 100) - 1;});
-    var embarrassmentResults = data.map(function(a) {return (a.embarrassment * 100) - 1;});
-    var empathyResults = data.map(function(a) {return (a.empathy * 100) - 1;});
-    var fearResults = data.map(function(a) {return (a.fear * 100) - 1;});
+    /* get array of character names from JSON file */
+    function getCharNames() {
+      var new_array = [];
+      for (var i = 0; i < data.characters.length; i++) {
+        var name = data.characters[i].character;
+        new_array.push(name);
+      }
+      return new_array;
+    }
+
+    var charNames = getCharNames();
+    console.log(charNames);
+
+    /* function to remove duplicates from charNames */
+    function rem_dupes(a) {
+      var seen = {}; /* create new object */
+      var out = [];
+      var len = a.length;
+      var j = 0;
+      for(var i = 0; i < len; i++) {
+        var item = a[i];
+        /* seen[object_property] */
+        if(seen[item] !== 1) {
+          seen[item] = 1; /* set object property value to 1 */
+          out[j++] = item; /* put charName in output array */
+        }
+      }
+      return out;
+    }
+
+    /* call rem_dupes() to remove duplicates from charName */
+    charNames = rem_dupes(charNames);
+    console.log(charNames);
+
+    /* function to get median of any category for any character */
+    function getMedian(name, category) {
+      var array = [];
+      for (var i = 0; i < data.characters.length; i++) {
+        if (data.characters[i].character == name) {
+          array.push(data.characters[i][category]);
+        }
+      }
+      return d3.median(array);
+    }
+
+    /* function concatenates median of given category for all characters */
+    function concatMedians(category) {
+      var array = [];
+      for (var i = 0; i < charNames.length; i++) {
+        var median = getMedian(charNames[i], category);
+        // console.log(median);
+        array.push(median);
+      }
+      return array;
+    }
+
+    /* create array of median values for each category */
+    var expressionResults = concatMedians("expression");
+    var awarenessResults = concatMedians("awareness");
+    var hopeResults = concatMedians("hope");
+    var embarrassmentResults = concatMedians("embarrassment");
+    var empathyResults = concatMedians("empathy");
+    var fearResults = concatMedians("fear");
+
+    /* function to adjust the median values to properly fit the scale */
+    function adjustToScaleSize(array) {
+      for (var i = 0; i < array.length; i++) {
+        array[i] = array[i] * 100;
+      }
+    }
+
+    /* adjust all array of medians to fit the scale */
+    adjustToScaleSize(expressionResults);
+    adjustToScaleSize(awarenessResults);
+    adjustToScaleSize(hopeResults);
+    adjustToScaleSize(embarrassmentResults);
+    adjustToScaleSize(empathyResults);
+    adjustToScaleSize(fearResults);
 
     /* 1) EXPRESSION */
     var scaling_expression = d3.scaleOrdinal()
-      .domain(charNames)
+      .domain(charNames) /* domain is discrete (elements of array must be unique) */
       .range(expressionResults); /* results for expression in corresponding order */
     var tickMarks_expression = d3.axisTop(scaling_expression);
     d3.select("#expression")

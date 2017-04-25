@@ -1,6 +1,6 @@
 <?php
 // php script for writing survey data into mySQL database
-include('database_connect.php');
+include('database_config.php');
 $data_array = json_decode(file_get_contents('php://input'), true);
 try {
   // 1. create database connection

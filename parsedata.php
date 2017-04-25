@@ -13,22 +13,26 @@ function parse_data() {
     // them in $col_names array.
     $stmt = $conn->query("SELECT subject_id, responses, character FROM `$table_data`");
     //$stmt->execute();
-    //$col_names = array();
+    $all_data = array();
     /* fetches the next row from the table set */
     while($row = $stmt->fetch()) { /* while there're still rows to be fetched */
       //$col_names[] = $row;
 
       /* $reponses saves an associative array */
       $responses = json_decode($row['responses'], true);
-      $all_data[] = array('subjectid' => $row['subject_id'],
+
+      $characters = array('subject_id' => $row['subject_id'],
       'character' => $row['character'],
       'expression' => intval($responses["Q0"]),
       'awareness' => intval($responses["Q1"]),
       'hope' => intval($responses["Q2"]),
       'embarrassment' => intval($responses["Q3"]),
       'empathy' => intval($responses["Q4"]));
+
+      /* push each $characters array onto $all_data array */
+      array_push($all_data, $characters);
     }
-    
+
     $json = json_encode($all_data)
     return $json
 

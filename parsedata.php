@@ -1,16 +1,16 @@
 <?php
-
+/* php function for parsing data into a correctly formatted json object */
 function parse_data() {
-  /* php function for parsing data into a correctly formatted json object */
+
+  /* 1. create database connection */
   include('database_config.php');
   $data_array = json_decode(file_get_contents('php://input'), true);
   try {
-    /* 1. create database connection
-     * using '->' to make non-static function calls for objects */
+    /* using '->' to make non-static function calls for objects */
     $conn = new PDO("mysql:host=$servername;port=$port;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     /* 2. perform database query:
-     * query() executes an SQL statement, returning a result set as a PDOStatement object */
+    * query() executes an SQL statement, returning a result set as a PDOStatement object */
     $stmt = $conn->query("SELECT subject_id, responses, character FROM `$table_data`");
 
     /* initialize new array */
@@ -45,19 +45,19 @@ function parse_data() {
       // 'thought' => intval($responses["Q17"])
     );
 
-      /* push each $characters array into the $all_data array */
-      array_push($all_data, $characters);
-    }
-
-    /* return json object */
-    $json = json_encode($all_data)
-    return $json
-
-  } catch(PDOException $e) {
-    $r = array('success' => false, 'error_message' => $e->getMessage());
-    echo json_encode($r);
+    /* push each $characters array into the $all_data array */
+    array_push($all_data, $characters);
   }
-  /* 3. close database connection */
-  $conn = null;
+
+  /* return json object */
+  $json = json_encode($all_data)
+  return $json
+
+} catch(PDOException $e) {
+  $r = array('success' => false, 'error_message' => $e->getMessage());
+  echo json_encode($r);
+}
+/* 3. close database connection */
+$conn = null;
 }
 ?>

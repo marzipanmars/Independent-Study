@@ -17,41 +17,47 @@
 <body></body>
 <script>
 
+/* generate a random subject ID */
+var subject_id = jsPsych.randomization.randomID(45);
+jsPsych.data.addProperties({
+  subject_id: subject_id
+});
+
 /* array containing character objects with name and description properties */
 var characters = [
   { name: "is a green frog", description: "<h1>A Green Frog</h1><p>Found throughout eastern North America, "
-  +"this classic 'pond frog' is medium-sized and green or bronze in color. "
+  +"this classic \"pond frog\" is medium-sized and green or bronze in color. "
   +"Daily life includes seeking out permanent ponds or slow streams with "
-  +"plenty of vegetation.</p>" },
+  +"plenty of vegetation.</p>", data: {character:"frog"}},
   { name: "is Charlie", description: "<h1>Charlie</h1><p>A 3-year-old Springer spaniel and "
-  +"a beloved member of the Graham family.</p>"},
+  +"a beloved member of the Graham family.</p>", data: {character:"Charlie"}},
   { name: "is Toby", description: "<h1>Toby</h1><p>A two-year-old chimpanzee living at an "
-  +"outdoor laboratory in Uganda.</p>"},
+  +"outdoor laboratory in Uganda.</p>", data: {character:"Toby"}},
   { name: "is a 7 week fetus", description: "<h1>A 7 Week Fetus</h1><p>At 7 weeks, a human fetus "
-  +"is almost half an inch long--roughly the size of a raspberry.</p>"},
-  { name: "is Nicholas Gannon", description: "<h1>Nicholas Gannon</h1><p>A five-month-old baby.</p>" },
+  +"is almost half an inch long--roughly the size of a raspberry.</p>", data: {character:"fetus"}},
+  { name: "is Nicholas Gannon", description: "<h1>Nicholas Gannon</h1><p>A five-month-old baby.</p>", data: {character:"Nicholas Gannon"}},
   { name: "is Samantha Hill", description: "<h1>Samantha Hill</h1><p>A five-year-old girl who lives "
-  +"with her parents and older sister Jennifer.</p>" },
+  +"with her parents and older sister Jennifer.</p>", data: {character:"Samantha Hill"}},
   { name: "is Sharon Harvey", description: "<h1>Sharon Harvey</h1><p>A thirty-eight-year-old, "
-  +"works at an advertising agency in Chicago.</p>"},
+  +"works at an advertising agency in Chicago.</p>", data: {character:"Sharon Harvey"}},
   { name: "is Todd Billingsly", description: "<h1>Todd Billingsly</h1><p>A thirty-year-old accountant "
-  +"who lives in New York City.</p>"},
+  +"who lives in New York City.</p>", data: {character:"Todd Billingsly"}},
   { name: "are you", description: "<h1>You</h1><p>When you look into a mirror, please consider "
-  +"how you, yourself, would compare with the other characters presented.</p>"},
+  +"how you, yourself, would compare with the other characters presented.</p>", data: {character:"You"}},
   { name: "is Gerald Schiff", description: "<h1>Gerald Schiff</h1><p>Gerald has been in a persistent vegetative "
   +"state (PVS) for the past six months. Although he has severe brain damage--Gerald does not "
   +"appear to communicate with others or make purposeful movements--his basic bodily functions "
-  +"(such as breathing, sleeping, and circulation) are preserved.</p>"},
+  +"(such as breathing, sleeping, and circulation) are preserved.</p>", data: {character:"Gerald Schiff"}},
   { name: "is Delores Gleitman", description: "<h1>Delores Gleitman</h1><p>Delores recently passed away at the age "
   +"of 65. As you complete the survey, please draw upon your own personal beliefs about people "
-  +"who have passed away.</p>"},
+  +"who have passed away.</p>", data: {character:"Delores Gleitman"}},
   { name: "is God", description: "<h1>God</h1><p>Many people believe that God is the creator of the universe "
   +"and the ultimate source of knowledge, power, and love. However, please draw upon your own "
-  +"personal beliefs about God.</p>"},
+  +"personal beliefs about God.</p>", data: {character:"God"}},
   { name: "is Kismet", description: "<h1>Kismet</h1><p>Kismet is part of a new class of 'sociable' robots "
   +"that can engage people in natural interaction. To do this, Kismet perceives a variety of "
   +"natural social signals from sound and sight, and delivers his own signals back to the human "
-  +"partner through gaze direction, facial expression, body posture, and vocal babbles.</p>"},
+  +"partner through gaze direction, facial expression, body posture, and vocal babbles.</p>", data: {character:"Kismet"}}
 ];
 
 /* function that returns an array of Strings; each jsPsych.timelineVariable() call
@@ -81,13 +87,13 @@ var questions = function(){
 }
 
 /* the five-point scale to be used */
-var scale = [ "Entirely Incapable", " ", " ", " ", "Entirely Capable"];
+var scale = [ "Entirely Incapable", " ", " ", " ", " ", "Entirely Capable"];
 
 var introduction_block = {
     type: 'text',
     text: "<h1>What kinds of things have minds?</h1><p>It's assumed that things "
     +"simply have more or less of a mind. For this survey, you will be judging "
-    +"18 individual mental capacties for 13 characters.</p>"
+    +"18 individual mental capacties for 13 characters. Press any key to begin.</p>"
 };
 
 var survey_procedure = {

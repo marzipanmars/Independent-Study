@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mind Perception Survey</title>
+  <script src="../jspsych-6.0/jspsych.js"></script>
+  <script src="../jspsych-6.0/plugins/jspsych-survey-likert.js"></script>
+  <script src="../jspsych-6.0/plugins/jspsych-text.js"></script>
+  <script src="js/main.js"></script>
+  <script src="serverComm.js"></script>
+  <link href="../jspsych-6.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  <style>
+  p {
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  </style>
+</head>
+<body></body>
+<script>
+
+/* generate a random subject ID */
+var subject_id = jsPsych.randomization.randomID(45);
+jsPsych.data.addProperties({
+  subject_id: subject_id
+});
+
+/* array containing character objects with name and description properties */
+var characters = [
+  { name: "is a green frog", description: "<h1>A Green Frog</h1><p>Found throughout eastern North America, "
+  +"this classic \"pond frog\" is medium-sized and green or bronze in color. "
+  +"Daily life includes seeking out permanent ponds or slow streams with "
+  +"plenty of vegetation.</p>", data: {character:"frog"}},
+  { name: "is Charlie", description: "<h1>Charlie</h1><p>A 3-year-old Springer spaniel and "
+  +"a beloved member of the Graham family.</p>", data: {character:"Charlie"}},
+  { name: "is Nicholas Gannon", description: "<h1>Nicholas Gannon</h1><p>A five-month-old baby.</p>", data: {character:"Nicholas Gannon"}},
+  { name: "is Todd Billingsly", description: "<h1>Todd Billingsly</h1><p>A thirty-year-old accountant "
+  +"who lives in New York City.</p>", data: {character:"Todd Billingsly"}},
+  { name: "is Delores Gleitman", description: "<h1>Delores Gleitman</h1><p>Delores recently passed away at the age "
+  +"of 65. As you complete the survey, please draw upon your own personal beliefs about people "
+  +"who have passed away.</p>", data: {character:"Delores Gleitman"}},
+  { name: "is Kismet", description: "<h1>Kismet</h1><p>Kismet is part of a new class of \"sociable\" robots "
+  +"that can engage people in natural interaction. To do this, Kismet perceives a variety of "
+  +"natural social signals from sound and sight, and delivers his own signals back to the human "
+  +"partner through gaze direction, facial expression, body posture, and vocal babbles.</p>", data: {character:"Kismet"}}
+];
+
+/* function that returns an array of Strings; each jsPsych.timelineVariable() call
+   returns a String value, rather than the function to retrieve that String had
+   'true' not been used as the second parameter for the function */
+var questions = function(){
+  return [
+  "How capable "+jsPsych.timelineVariable('name',true)+" of conveying thoughts and feelings?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of having experiences and being aware of things?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of longing or hoping for things?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of experiencing embarrassment?",
+  "How capable "+jsPsych.timelineVariable('name',true)+" of understanding how others are feeling?"
+  ];
+}
+
+/* the five-point scale to be used */
+var scale = [ "Entirely Incapable", " ", " ", " ", " ", "Entirely Capable"];
+
+var introduction_block = {
+    type: 'text',
+    text: "<h1>What kinds of things have minds?</h1><p>It's assumed that things "
+    +"simply have more or less of a mind. For this survey, you will be judging "
+    +"5 individual mental capacties for 6 characters. Press any key to begin.</p>"
+};
+
+var survey_procedure = {
+    timeline: [
+        {
+          type: 'survey-likert',
+          questions: questions,
+          labels: [ scale, scale, scale, scale, scale, scale ],
+          preamble: jsPsych.timelineVariable('description'),
+          data: jsPsych.timelineVariable('data')
+        }
+    ],
+    timeline_variables: characters
+};
+
+jsPsych.init({
+  timeline: [ introduction_block, survey_procedure ],
+  //on_finish:
+  on_data_update: function(data) {
+    serverComm.save_data([data]);
+  }
+});
+
+</script>
+</html>

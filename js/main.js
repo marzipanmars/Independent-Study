@@ -16,8 +16,8 @@ function visualizeData() {
   .attr("transform", "translate(90, 90)")
 
   /* set scaleBar labels, width, height, fill-color, and y-offset */
-  var data_categories = ["expression", "awareness", "hope", "embarrassment", "empathy",
-  "fear", "hunger", "joy", "memory", "morality", "joy", "pain", "personality",
+  var data_categories = ["expression", "awareness", "hope", "embarrassment",
+  "empathy", "fear", "hunger", "joy", "memory", "morality", "pain", "personality",
   "attainment", "pleasure", "pride", "anger", "self-restraint", "thought"],
   scale_width = 801,
   scale_height = 25,
@@ -163,7 +163,7 @@ function visualizeData() {
     var prideResults = concatMedians("pride");
     var angerResults = concatMedians("anger");
     var self_restraintResults = concatMedians("self-restraint");
-    var thoughtResults = concatMedians("thought")
+    var thoughtResults = concatMedians("thought");
 
     /* function to adjust the median values to properly fit the scale */
     function adjustToScaleSize(array) {

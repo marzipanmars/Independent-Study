@@ -1,6 +1,6 @@
 function visualizeData() {
   /* set width and height of svg image */
-  var canvas_width = 1000,
+  var canvas_width = 1200,
   canvas_height = 2000;
 
   /* scaling to adjust height of scaleBars if they exceed the range */
@@ -19,9 +19,9 @@ function visualizeData() {
   var data_categories = ["expression", "awareness", "hope", "embarrassment", "empathy",
   "fear", "hunger", "joy", "memory", "morality", "joy", "pain", "personality",
   "attainment", "pleasure", "pride", "anger", "self-restraint", "thought"],
-  scale_width = 501,
+  scale_width = 801,
   scale_height = 25,
-  fill_color = "Gainsboro"
+  fill_color = "Gainsboro",
   dy = 100;
 
   /* create as many rectangles as there are elements in "data_categories" */
@@ -138,7 +138,7 @@ function visualizeData() {
     function concatMedians(category) {
       var array = [];
       for (var i = 0; i < charNames.length; i++) {
-        var median = (int)getMedian(charNames[i], category);
+        var median = getMedian(charNames[i], category);
         // console.log(median);
         array.push(median);
       }
@@ -168,7 +168,7 @@ function visualizeData() {
     /* function to adjust the median values to properly fit the scale */
     function adjustToScaleSize(array) {
       for (var i = 0; i < array.length; i++) {
-        array[i] = array[i] * 100;
+        array[i] = array[i] * 160;
       }
     }
 
@@ -279,116 +279,116 @@ function visualizeData() {
     .append("g")
     .attr("class", "tickMarks")
     .attr("transform", "translate(0," + (dy * 7) + ")")
-    .call(tickMarks_joy;
+    .call(tickMarks_joy);
 
-      /* 9) MEMORY */
-      var scaling_memory = d3.scaleOrdinal()
-      .domain(charNames) /* domain is discrete (elements of array must be unique) */
-      .range(memoryResults); /* results for memory in corresponding order */
-      var tickMarks_memory = d3.axisTop(scaling_memory);
-      d3.select("#memory")
-      .append("g")
-      .attr("class", "tickMarks")
-      .attr("transform", "translate(0," + (dy * 8) + ")")
-      .call(tickMarks_memory);
+    /* 9) MEMORY */
+    var scaling_memory = d3.scaleOrdinal()
+    .domain(charNames) /* domain is discrete (elements of array must be unique) */
+    .range(memoryResults); /* results for memory in corresponding order */
+    var tickMarks_memory = d3.axisTop(scaling_memory);
+    d3.select("#memory")
+    .append("g")
+    .attr("class", "tickMarks")
+    .attr("transform", "translate(0," + (dy * 8) + ")")
+    .call(tickMarks_memory);
 
-      /* 10) MORALITY */
-      var scaling_morality = d3.scaleOrdinal()
-      .domain(charNames)
-      .range(moralityResults); /* results for morality in corresponding order */
-      var tickMarks_morality = d3.axisTop(scaling_morality);
-      d3.select("#morality")
-      .append("g")
-      .attr("class", "tickMarks")
-      .attr("transform", "translate(0," + (dy * 9) + ")")
-      .call(tickMarks_morality);
+    /* 10) MORALITY */
+    var scaling_morality = d3.scaleOrdinal()
+    .domain(charNames)
+    .range(moralityResults); /* results for morality in corresponding order */
+    var tickMarks_morality = d3.axisTop(scaling_morality);
+    d3.select("#morality")
+    .append("g")
+    .attr("class", "tickMarks")
+    .attr("transform", "translate(0," + (dy * 9) + ")")
+    .call(tickMarks_morality);
 
-      /* 11) PAIN */
-      var scaling_pain = d3.scaleOrdinal()
-      .domain(charNames)
-      .range(painResults); /* results for pain in corresponding order */
-      var tickMarks_pain = d3.axisTop(scaling_pain);
-      d3.select("#pain")
-      .append("g")
-      .attr("class", "tickMarks")
-      .attr("transform", "translate(0," + (dy * 10) + ")")
-      .call(tickMarks_pain);
+    /* 11) PAIN */
+    var scaling_pain = d3.scaleOrdinal()
+    .domain(charNames)
+    .range(painResults); /* results for pain in corresponding order */
+    var tickMarks_pain = d3.axisTop(scaling_pain);
+    d3.select("#pain")
+    .append("g")
+    .attr("class", "tickMarks")
+    .attr("transform", "translate(0," + (dy * 10) + ")")
+    .call(tickMarks_pain);
 
-      /* 12) PERSONALITY */
-      var scaling_personality = d3.scaleOrdinal()
-      .domain(charNames)
-      .range(personalityResults); /* results for personality in corresponding order */
-      var tickMarks_personality = d3.axisTop(scaling_personality);
-      d3.select("#personality")
-      .append("g")
-      .attr("class", "tickMarks")
-      .attr("transform", "translate(0," + (dy * 11) + ")")
-      .call(tickMarks_personality);
+    /* 12) PERSONALITY */
+    var scaling_personality = d3.scaleOrdinal()
+    .domain(charNames)
+    .range(personalityResults); /* results for personality in corresponding order */
+    var tickMarks_personality = d3.axisTop(scaling_personality);
+    d3.select("#personality")
+    .append("g")
+    .attr("class", "tickMarks")
+    .attr("transform", "translate(0," + (dy * 11) + ")")
+    .call(tickMarks_personality);
 
-      /* 13) ATTAINMENT */
-      var scaling_attainment = d3.scaleOrdinal()
-      .domain(charNames)
-      .range(attainmentResults); /* results for attainment in corresponding order */
-      var tickMarks_attainment = d3.axisTop(scaling_attainment);
-      d3.select("#attainment")
-      .append("g")
-      .attr("class", "tickMarks")
-      .attr("transform", "translate(0," + (dy * 12) + ")")
-      .call(tickMarks_attainment);
+    /* 13) ATTAINMENT */
+    var scaling_attainment = d3.scaleOrdinal()
+    .domain(charNames)
+    .range(attainmentResults); /* results for attainment in corresponding order */
+    var tickMarks_attainment = d3.axisTop(scaling_attainment);
+    d3.select("#attainment")
+    .append("g")
+    .attr("class", "tickMarks")
+    .attr("transform", "translate(0," + (dy * 12) + ")")
+    .call(tickMarks_attainment);
 
-      /* 14) PLEASURE */
-      var scaling_pleasure = d3.scaleOrdinal()
-      .domain(charNames)
-      .range(pleasureResults); /* results for pleasure in corresponding order */
-      var tickMarks_pleasure = d3.axisTop(scaling_pleasure);
-      d3.select("#pleasure")
-      .append("g")
-      .attr("class", "tickMarks")
-      .attr("transform", "translate(0," + (dy * 13) + ")")
-      .call(tickMarks_pleasure);
+    /* 14) PLEASURE */
+    var scaling_pleasure = d3.scaleOrdinal()
+    .domain(charNames)
+    .range(pleasureResults); /* results for pleasure in corresponding order */
+    var tickMarks_pleasure = d3.axisTop(scaling_pleasure);
+    d3.select("#pleasure")
+    .append("g")
+    .attr("class", "tickMarks")
+    .attr("transform", "translate(0," + (dy * 13) + ")")
+    .call(tickMarks_pleasure);
 
-      /* 15) PRIDE */
-      var scaling_pride = d3.scaleOrdinal()
-      .domain(charNames)
-      .range(prideResults); /* results for pride in corresponding order */
-      var tickMarks_pride = d3.axisTop(scaling_pride);
-      d3.select("#pride")
-      .append("g")
-      .attr("class", "tickMarks")
-      .attr("transform", "translate(0," + (dy * 14) + ")")
-      .call(tickMarks_pride);
+    /* 15) PRIDE */
+    var scaling_pride = d3.scaleOrdinal()
+    .domain(charNames)
+    .range(prideResults); /* results for pride in corresponding order */
+    var tickMarks_pride = d3.axisTop(scaling_pride);
+    d3.select("#pride")
+    .append("g")
+    .attr("class", "tickMarks")
+    .attr("transform", "translate(0," + (dy * 14) + ")")
+    .call(tickMarks_pride);
 
-      /* 16) ANGER */
-      var scaling_anger = d3.scaleOrdinal()
-      .domain(charNames)
-      .range(angerResults); /* results for anger in corresponding order */
-      var tickMarks_anger = d3.axisTop(scaling_anger);
-      d3.select("#anger")
-      .append("g")
-      .attr("class", "tickMarks")
-      .attr("transform", "translate(0," + (dy * 15) + ")")
-      .call(tickMarks_anger);
+    /* 16) ANGER */
+    var scaling_anger = d3.scaleOrdinal()
+    .domain(charNames)
+    .range(angerResults); /* results for anger in corresponding order */
+    var tickMarks_anger = d3.axisTop(scaling_anger);
+    d3.select("#anger")
+    .append("g")
+    .attr("class", "tickMarks")
+    .attr("transform", "translate(0," + (dy * 15) + ")")
+    .call(tickMarks_anger);
 
-      /* 17) SELF-RESTRAINT */
-      var scaling_restraint = d3.scaleOrdinal()
-      .domain(charNames)
-      .range(self_restraintResults); /* results for self-restraint in corresponding order */
-      var tickMarks_restraint = d3.axisTop(scaling_restraint);
-      d3.select("#self-restraint")
-      .append("g")
-      .attr("class", "tickMarks")
-      .attr("transform", "translate(0," + (dy * 16) + ")")
-      .call(tickMarks_restraint);
+    /* 17) SELF-RESTRAINT */
+    var scaling_restraint = d3.scaleOrdinal()
+    .domain(charNames)
+    .range(self_restraintResults); /* results for self-restraint in corresponding order */
+    var tickMarks_restraint = d3.axisTop(scaling_restraint);
+    d3.select("#self-restraint")
+    .append("g")
+    .attr("class", "tickMarks")
+    .attr("transform", "translate(0," + (dy * 16) + ")")
+    .call(tickMarks_restraint);
 
-      /* 18) THOUGHT */
-      var scaling_thought = d3.scaleOrdinal()
-      .domain(charNames)
-      .range(thoughtResults); /* results for thought in corresponding order */
-      var tickMarks_thought = d3.axisTop(scaling_thought);
-      d3.select("#thought")
-      .append("g")
-      .attr("class", "tickMarks")
-      .attr("transform", "translate(0," + (dy * 17) + ")")
-      .call(tickMarks_thought);
-    })
-  }
+    /* 18) THOUGHT */
+    var scaling_thought = d3.scaleOrdinal()
+    .domain(charNames)
+    .range(thoughtResults); /* results for thought in corresponding order */
+    var tickMarks_thought = d3.axisTop(scaling_thought);
+    d3.select("#thought")
+    .append("g")
+    .attr("class", "tickMarks")
+    .attr("transform", "translate(0," + (dy * 17) + ")")
+    .call(tickMarks_thought);
+  })
+}

@@ -96,7 +96,7 @@ var scale = [ "Entirely Incapable", " ", " ", " ", " ", "Entirely Capable"];
 
 var instructor_select = {
   type: 'survey-multi-choice',
-  questions: ['Select your instructor.'],
+  questions: ['Select your instructor:'],
   options: [config.instructors],
   on_finish: function(data) {
     var instructor = JSON.parse(data.responses).Q0;

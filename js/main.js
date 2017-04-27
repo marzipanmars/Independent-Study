@@ -1,25 +1,3 @@
-
-// data parameter should be either the value of jsPsych.data()
-// or the parameter that is passed to the on_data_update callback function for the core library
-// jsPsych.data() contains ALL data
-// the callback function will contain only the most recently written data.
-// function save_data(data){
-//    var data_table = "mindperception"; // change this for different experiments
-//    $.ajax({
-//       type:'post',
-//       cache: false,
-//       url: '../savedata.php', // change this to point to your php file.
-//       // opt_data is to add additional values to every row, like a subject ID
-//       // replace 'key' with the column name, and 'value' with the value.
-//       data: {
-//           table: data_table,
-//           json: JSON.stringify(data),
-//           opt_data: {key: value}
-//       },
-//       success: function(output) { console.log(output); } // write the result to javascript console
-//    });
-// }
-
 function visualizeData() {
   /* set width and height of svg image */
   var canvas_width = 1000,
@@ -107,13 +85,13 @@ function visualizeData() {
         })
 
   /* import JSON */
-  d3.json("test_data2.json", function(data) {
+  d3.json("parsedata.php", function(data) {
 
     /* get array of character names from JSON file */
     function getCharNames() {
       var new_array = [];
-      for (var i = 0; i < data.characters.length; i++) {
-        var name = data.characters[i].character;
+      for (var i = 0; i < data.length; i++) {
+        var name = data[i].character;
         new_array.push(name);
       }
       return new_array;
@@ -146,9 +124,9 @@ function visualizeData() {
     /* function to get median of any category for any character */
     function getMedian(name, category) {
       var array = [];
-      for (var i = 0; i < data.characters.length; i++) {
-        if (data.characters[i].character == name) {
-          array.push(data.characters[i][category]);
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].character == name) {
+          array.push(data[i][category]);
         }
       }
       return d3.median(array);

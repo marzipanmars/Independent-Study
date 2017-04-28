@@ -168,7 +168,7 @@ function visualizeData() {
     /* function to adjust the median values to properly fit the scale */
     function adjustToScaleSize(array) {
       for (var i = 0; i < array.length; i++) {
-        array[i] = array[i] * 160;
+        array[i] = array[i] * (Math.floor(scale_width/5));
       }
     }
 

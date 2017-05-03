@@ -6,37 +6,52 @@
   <script src="bower_components/foundation/js/foundation.js"></script>
   <script src="bower_components/modernizr/modernizr.js"></script>
   <script src="bower_components/d3/d3.min.js"></script>
+  <script src="jquery-nice-select-1.1.0/js/jquery.js"></script>
+  <script src="jquery-nice-select-1.1.0/js/jquery.nice-select.js"></script>
+  <link rel="stylesheet" href="jquery-nice-select-1.1.0/css/nice-select.css">
   <script src="js/main.js"></script>
   <title>Survey Results</title>
   <style>
-    #title {
-      text-align: center;
-      padding-top: 5%;
-      margin-bottom: 0;
-    }
-    .svgContainer {
-      text-align: center;
-      margin-left: 11%;
-    }
-    .scaleAxis line, .scaleAxis path {
-      stroke: Gainsboro;
-    }
-    .scaleAxis text {
-      fill: Gainsboro;
-    }
-    .tickMarks line, .tickMarks path {
-      stroke: Gainsboro;
-    }
-    .tickMarks text {
-      font-family: serif;
-    }
+  #title {
+    text-align: center;
+    padding-top: 5%;
+    margin-bottom: 0;
+  }
+  .filter_opt {
+    margin-top: 3%;
+    margin-left: 43.5%;
+    margin-right: 46.5%;
+  }
+  .svgContainer {
+    text-align: center;
+    margin-left: 11%;
+    margin-right: 50%;
+  }
+  .scaleAxis line, .scaleAxis path {
+    stroke: Gainsboro;
+  }
+  .scaleAxis text {
+    fill: Gainsboro;
+  }
+  .tickMarks line, .tickMarks path {
+    stroke: Gainsboro;
+  }
+  .tickMarks text {
+    font-family: serif;
+  }
   </style>
 </head>
 <body>
   <h1 id="title">Mind Perception Survey Results</h1>
+    <select class="filter_opt">
+      <option data-display="Filter by instructor" value="">Filter by instructor</option>
+      <option value="Janet Andrews">Janet Andrews</option>
+      <option value="Josh de Leeuw">Josh de Leeuw</option>
+      <option value="John Long">John Long</option>
+    </select>
   <div class="svgContainer"></div>
   <script>
-    visualizeData();
+  visualizeData();
   </script>
 </body>
 </html>

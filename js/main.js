@@ -1,3 +1,7 @@
+/* initialize jquery-nice-select plugin */
+$(document).ready(function() {
+  $('select').niceSelect();
+});
 function visualizeData() {
   /* set width and height of svg image */
   var canvas_width = 1200,

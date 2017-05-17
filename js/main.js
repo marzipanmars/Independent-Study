@@ -143,7 +143,7 @@ function visualizeData() {
       /* using plain javascript to get selected value from drop-down menu */
       var e = document.getElementsByClassName("filterDropDownMenu")[0];
       var selected = e.options[e.selectedIndex].value;
-      console.log(selected);
+      //console.log(selected);
       switch(selected) {
         case "Janet Andrews":
         for (var i = 0; i < data.length; i++) {

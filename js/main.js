@@ -2,6 +2,16 @@
 $(document).ready(function() {
   $('select').niceSelect();
 });
+
+/* clears svgContainer then recreates visualization with new selection */
+function revisualizeData() {
+  var elements = document.getElementsByTagName("svg");
+  while (elements.length > 0) {
+    elements[0].parentNode.removeChild(elements[0]);
+  }
+  visualizeData();
+}
+
 function visualizeData() {
   /* set width and height of svg image */
   var canvas_width = 1200,
@@ -130,9 +140,37 @@ function visualizeData() {
     /* function to get median of any category for any character */
     function getMedian(name, category) {
       var array = [];
-      for (var i = 0; i < data.length; i++) {
-        if (data[i].character == name) {
-          array.push(data[i][category]);
+      /* using plain javascript to get selected value from drop-down menu */
+      var e = document.getElementsByClassName("filterDropDownMenu")[0];
+      var selected = e.options[e.selectedIndex].value;
+      console.log(selected);
+      switch(selected) {
+        case "Janet Andrews":
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].character == name && data[i].instructor == "Janet Andrews") {
+            array.push(data[i][category]);
+          }
+        }
+        break;
+        case "Joshua de Leeuw":
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].character == name && data[i].instructor == "Joshua de Leeuw") {
+            array.push(data[i][category]);
+          }
+        }
+        break;
+        case "John Long":
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].character == name && data[i].instructor == "John Long") {
+            array.push(data[i][category]);
+          }
+        }
+        break;
+        default:
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].character == name) {
+            array.push(data[i][category]);
+          }
         }
       }
       return d3.median(array);

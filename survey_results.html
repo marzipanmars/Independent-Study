@@ -12,28 +12,19 @@
   <script src="js/main.js"></script>
   <title>Survey Results</title>
   <style>
+  body {
+    margin: 0 15%;
+  }
   #title {
     text-align: center;
-    margin-left: 1%;
     padding-top: 5%;
     margin-bottom: 0;
   }
   #filteringOptions {
-    display: flex;
+    display: inline-flex;
+    margin: .5em 24%;
   }
-  .filterByInstructor {
-    margin-top: 2%;
-    margin-left: 37%;
-    margin-right: 2%;
-  }
-  .filterByTerm {
-    margin-top: 2%;
-  }
-  .svgContainer {
-    text-align: center;
-    margin-left: 11%;
-    margin-right: 50%;
-  }
+  select[name~="filterBy"] {margin-top: 2%;}
   .scaleAxis line, .scaleAxis path {
     stroke: Gainsboro;
   }
@@ -51,16 +42,32 @@
 <body>
   <h1 id="title">Mind Perception Survey Results</h1>
   <div id=filteringOptions>
-    <select class="filterByInstructor" onchange="revisualizeData();">
+    <select class="filterByInstructor" name="filterByInstructor" onchange="revisualizeData();">
       <option data-display="Filter by instructor">Filter by instructor</option>
-      <option value="Janet Andrews">Janet Andrews</option>
-      <option value="Joshua de Leeuw">Joshua de Leeuw</option>
-      <option value="John Long">John Long</option>
+      <option>Janet Andrews</option>
+      <option>Joshua de Leeuw</option>
+      <option>John Long</option>
     </select>
-    <select class="filterByTerm">
+    <select class="filterByTerm" name="filterByTerm">
       <option data-display="Filter by term">Filter by term</option>
-      <option value="Spring 2017">Spring 2017</option>
-      <option value="Fall 2016">Fall 2016</option>
+      <option>Spring 2017</option>
+      <option>Fall 2016</option>
+    </select>
+    <select class="filterByCharacter" name="filterByCharacter">
+      <option data-display="Filter by character">Filter by character</option>
+      <option>frog</option>
+      <option>Charlie</option>
+      <option>Toby</option>
+      <option>fetus</option>
+      <option>Nicholas Gannon</option>
+      <option>Samantha Hill</option>
+      <option>Sharon Harvey</option>
+      <option>Todd Billingsly</option>
+      <option>You</option>
+      <option>Gerald Schiff</option>
+      <option>Delores Gleitman</option>
+      <option>God</option>
+      <option>Kismet</option>
     </select>
   </div>
   <div class="svgContainer"></div>

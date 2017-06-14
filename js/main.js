@@ -14,8 +14,8 @@ function revisualizeData() {
 
 function visualizeData() {
   /* set width and height of svg image */
-  var canvas_width = 1200,
-  canvas_height = 2000;
+  var canvas_width = 1000,
+  canvas_height = 1000;
 
   /* scaling to adjust height of scaleBars if they exceed the range */
   // var scaling = d3.scaleLinear()
@@ -34,7 +34,7 @@ function visualizeData() {
   "empathy", "fear", "hunger", "joy", "memory", "morality", "pain", "personality",
   "attainment", "pleasure", "pride", "anger", "self-restraint", "thought"],
   scale_width = 801,
-  scale_height = 25,
+  scale_height = 15,
   fill_color = "Gainsboro",
   dy = 100;
 
@@ -82,7 +82,7 @@ function visualizeData() {
   .attr("class", "scaleAxis")
   /* moves each axis to the bottom of its scaleBar */
   .attr("transform", function(d, i) {
-    return "translate(0," + (i * dy + 25) + ")";
+    return "translate(0," + (i * dy + 15) + ")";
   })
   .call(axis);
 
@@ -140,11 +140,19 @@ function visualizeData() {
     /* function to get median of any category for any character */
     function getMedian(name, category) {
       var array = [];
-      /* using plain javascript to get selected value from drop-down menu */
-      var e = document.getElementsByClassName("filterByInstructor")[0];
-      var selected = e.options[e.selectedIndex].value;
+      /* using plain javascript to get selected value from drop-down menus */
+      var instructor = document.getElementsByClassName("filterByInstructor")[0];
+      var selected_instructor = instructor.options[instructor.selectedIndex].value;
+      /* SELECTED INSTRUCTOR */
+      var term = document.getElementsByClassName("filterByTerm")[0];
+      var selected_term = term.options[term.selectedIndex].value;
+      /* SELECTED TERM */
+      var character = document.getElementsByClassName("filterByCharacter")[0];
+      var selected_character = character.options[character.selectedIndex].value;
+      /* SELECTED CHARACTER */
+
       //console.log(selected);
-      switch(selected) {
+      switch(selected_instructor) {
         case "Janet Andrews":
         for (var i = 0; i < data.length; i++) {
           if (data[i].character == name && data[i].instructor == "Janet Andrews") {

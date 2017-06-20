@@ -16,13 +16,18 @@
     margin: 0 15%;
   }
   #title {
-    text-align: center;
     padding-top: 5%;
-    margin-bottom: 0;
+    margin-bottom: 25px;
+    position: relative;
+    top: 10px;
+    left: 26.5%;
   }
   #filteringOptions {
     display: inline-flex;
-    margin: .5em 24%;
+    position: static;
+    margin: .5em 25%;
+    overflow: auto;
+    width: 100%;
   }
   select[name~="filterBy"] {margin-top: 2%;}
   .scaleAxis line, .scaleAxis path {
@@ -36,6 +41,10 @@
   }
   .tickMarks text {
     font-family: serif;
+  }
+  .svgContainer {
+    position: relative;
+    left: -35px;
   }
   </style>
 </head>
@@ -51,7 +60,7 @@
     <select class="filterByTerm" name="filterByTerm">
       <option data-display="Filter by term">Filter by term</option>
       <option>Spring 2017</option>
-      <option>Fall 2016</option>
+      <option>Fall 2017</option>
     </select>
     <select class="filterByCharacter" name="filterByCharacter">
       <option data-display="Filter by character">Filter by character</option>

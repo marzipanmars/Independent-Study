@@ -10,7 +10,7 @@ try {
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   /* 2. perform database query:
   * query() executes an SQL statement, returning a result set as a PDOStatement object */
-  $stmt = $conn->query("SELECT `subject_id`, `responses`, `character`, `instructor` FROM `$table_data`");
+  $stmt = $conn->query("SELECT `subject_id`, `responses`, `character`, `instructor`, `term`, `year` FROM `$table_data`");
 
   /* initialize new array */
   $all_data = array();
@@ -25,6 +25,7 @@ try {
       /* create array that contains all necessary keys and values */
       $characters = array('subject_id' => $row['subject_id'],
       'instructor' => $row['instructor'],
+      'term' => $row['term'] . " " . $row['year'],
       'character' => $row['character'],
       'expression' => intval($responses["Q0"]),
       'awareness' => intval($responses["Q1"]),

@@ -103,6 +103,17 @@ function visualizeData() {
   /* import JSON */
   d3.json("parsedata.php", function(data) {
 
+    /* using plain javascript to get selected value from drop-down menus */
+    var instructor = document.getElementsByClassName("filterByInstructor")[0];
+    var selected_instructor = instructor.options[instructor.selectedIndex].value;
+    /* global var SELECTED INSTRUCTOR */
+    var term = document.getElementsByClassName("filterByTerm")[0];
+    var selected_term = term.options[term.selectedIndex].value;
+    /* global var SELECTED TERM */
+    var character = document.getElementsByClassName("filterByCharacter")[0];
+    var selected_character = character.options[character.selectedIndex].value;
+    /* global var SELECTED CHARACTER */
+
     /* get array of character names from JSON file */
     function getCharNames() {
       var new_array = [];
@@ -140,16 +151,6 @@ function visualizeData() {
     /* function to get median of any category for any character */
     function getMedian(name, category) {
       var array = [];
-      /* using plain javascript to get selected value from drop-down menus */
-      var instructor = document.getElementsByClassName("filterByInstructor")[0];
-      var selected_instructor = instructor.options[instructor.selectedIndex].value;
-      /* SELECTED INSTRUCTOR */
-      var term = document.getElementsByClassName("filterByTerm")[0];
-      var selected_term = term.options[term.selectedIndex].value;
-      /* SELECTED TERM */
-      var character = document.getElementsByClassName("filterByCharacter")[0];
-      var selected_character = character.options[character.selectedIndex].value;
-      /* SELECTED CHARACTER */
 
       //console.log(selected);
       switch(selected_instructor) {

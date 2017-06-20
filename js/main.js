@@ -15,7 +15,7 @@ function revisualizeData() {
 function visualizeData() {
   /* set width and height of svg image */
   var canvas_width = 1000,
-  canvas_height = 1000;
+  canvas_height = 1900;
 
   /* scaling to adjust height of scaleBars if they exceed the range */
   // var scaling = d3.scaleLinear()

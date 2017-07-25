@@ -14,19 +14,20 @@
   <style>
   body {
     margin: 0 15%;
+    min-width: 800px;
   }
   #title {
     padding-top: 5%;
     margin-bottom: 25px;
     position: relative;
     top: 10px;
-    left: 26.5%;
+    left: 25%;
+    width: 60%;
   }
   #filteringOptions {
     display: inline-flex;
-    position: static;
-    margin: .5em 25%;
-    width: 100%;
+    margin: .5em 31.8%;
+    width: 50%;
   }
   select[name~="filterBy"] {margin-top: 2%;}
   .scaleAxis line, .scaleAxis path {
@@ -43,7 +44,7 @@
   }
   .svgContainer {
     position: relative;
-    left: -35px;
+    left: -40px;
   }
   </style>
 </head>
@@ -56,26 +57,10 @@
       <option>Joshua de Leeuw</option>
       <option>John Long</option>
     </select>
-    <select class="filterByTerm" name="filterByTerm">
-      <option data-display="Filter by term">Filter by term</option>
+    <select class="filterByTerm" name="filterByTerm" onchange="revisualizeData();">
+      <option id="termFilterDefault" data-display="Filter by term">Filter by term</option>
       <option>Spring 2017</option>
       <option>Fall 2017</option>
-    </select>
-    <select class="filterByCharacter" name="filterByCharacter">
-      <option data-display="Filter by character">Filter by character</option>
-      <option>frog</option>
-      <option>Charlie</option>
-      <option>Toby</option>
-      <option>fetus</option>
-      <option>Nicholas Gannon</option>
-      <option>Samantha Hill</option>
-      <option>Sharon Harvey</option>
-      <option>Todd Billingsly</option>
-      <option>You</option>
-      <option>Gerald Schiff</option>
-      <option>Delores Gleitman</option>
-      <option>God</option>
-      <option>Kismet</option>
     </select>
   </div>
   <div class="svgContainer"></div>

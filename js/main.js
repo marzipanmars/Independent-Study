@@ -106,13 +106,10 @@ function visualizeData() {
     /* using plain javascript to get selected value from drop-down menus */
     var instructor = document.getElementsByClassName("filterByInstructor")[0];
     var selected_instructor = instructor.options[instructor.selectedIndex].value;
-    /* global var SELECTED INSTRUCTOR */
+    /* local var SELECTED INSTRUCTOR */
     var term = document.getElementsByClassName("filterByTerm")[0];
     var selected_term = term.options[term.selectedIndex].value;
-    /* global var SELECTED TERM */
-    var character = document.getElementsByClassName("filterByCharacter")[0];
-    var selected_character = character.options[character.selectedIndex].value;
-    /* global var SELECTED CHARACTER */
+    /* local var SELECTED TERM */
 
     /* get array of character names from JSON file */
     function getCharNames() {
@@ -152,25 +149,30 @@ function visualizeData() {
     function getMedian(name, category) {
       var array = [];
 
-      //console.log(selected);
+      /* filter only by the instructor */
+      if (document.getElementById("termFilterDefault").selected) {
+      /* because the void default term filter option has been selected */
       switch(selected_instructor) {
         case "Janet Andrews":
         for (var i = 0; i < data.length; i++) {
-          if (data[i].character == name && data[i].instructor == "Janet Andrews") {
+          if (data[i].character == name &&
+              data[i].instructor == "Janet Andrews") {
             array.push(data[i][category]);
           }
         }
         break;
         case "Joshua de Leeuw":
         for (var i = 0; i < data.length; i++) {
-          if (data[i].character == name && data[i].instructor == "Joshua de Leeuw") {
+          if (data[i].character == name &&
+              data[i].instructor == "Joshua de Leeuw") {
             array.push(data[i][category]);
           }
         }
         break;
         case "John Long":
         for (var i = 0; i < data.length; i++) {
-          if (data[i].character == name && data[i].instructor == "John Long") {
+          if (data[i].character == name &&
+              data[i].instructor == "John Long") {
             array.push(data[i][category]);
           }
         }
@@ -182,6 +184,45 @@ function visualizeData() {
           }
         }
       }
+    } else {
+      /* filter by both instructor and term */
+      switch(selected_instructor) { /* because the void default term filter option was unselected */
+        case "Janet Andrews":
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].character == name &&
+              data[i].instructor == "Janet Andrews" &&
+              data[i].term == selected_term) {
+            array.push(data[i][category]);
+          }
+        }
+        break;
+        case "Joshua de Leeuw":
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].character == name &&
+              data[i].instructor == "Joshua de Leeuw" &&
+              data[i].term == selected_term) {
+            array.push(data[i][category]);
+          }
+        }
+        break;
+        case "John Long":
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].character == name &&
+              data[i].instructor == "John Long" &&
+              data[i].term == selected_term) {
+            array.push(data[i][category]);
+          }
+        }
+        break;
+        default:
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].character == name &&
+              data[i].term == selected_term) {
+            array.push(data[i][category]);
+          }
+        }
+      }
+    }
       return d3.median(array);
     }
 
